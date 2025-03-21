@@ -1,0 +1,40 @@
+<div *ngIf="!juegoIniciado">
+  <h1>Juego de Adivinanza</h1>
+
+  <form (ngSubmit)="onSubmit()" (input)="validarFormulario()">
+      <div>
+          <label for="nombre">Nombre:</label>
+          <input id="nombre" type="text" [(ngModel)]="configuracion.nombre" name="nombre" required>
+          <span [ngStyle]="{ color: feedback.nombre === '✅' ? 'green' : 'red' }"> {{ feedback.nombre }} </span>
+      </div>
+      <div>
+          <label for="apellido">Apellido:</label>
+          <input id="apellido" type="text" [(ngModel)]="configuracion.apellido" name="apellido" required>
+          <span [ngStyle]="{ color: feedback.apellido === '✅' ? 'green' : 'red' }"> {{ feedback.apellido }} </span>
+      </div>
+      <div>
+          <label for="rangoMaximo">Rango Máximo:</label>
+          <input id="rangoMaximo" type="number" [(ngModel)]="configuracion.rangoMaximo" name="rangoMaximo" min="4" required>
+          <span [ngStyle]="{ color: feedback.rangoMaximo === '✅' ? 'green' : 'red' }"> {{ feedback.rangoMaximo }} </span>
+      </div>
+      <div>
+          <label for="numeroIntentos">Número de Intentos:</label>
+          <input id="numeroIntentos" type="number" [(ngModel)]="configuracion.numeroIntentos" name="numeroIntentos" min="1" required>
+          <span [ngStyle]="{ color: feedback.numeroIntentos === '✅' ? 'green' : 'red' }"> {{ feedback.numeroIntentos }} </span>
+      </div>
+      <button type="submit" [disabled]="!botonHabilitado">Recoger Datos</button>
+  </form>
+</div>
+
+<div *ngIf="juegoIniciado">
+  <h2 [innerHTML]="feedback.mensajeBienvenida"></h2>
+  <p>Intentos restantes: {{ feedback.intentosRestantes }}</p>
+  <div>
+      <label for="numeroIngresado">Introduce un número:</label>
+      <input id="numeroIngresado" type="number" [(ngModel)]="numeroIngresado" name="numeroIngresado">
+  </div>
+  <button (click)="verificarNumero()">Enviar</button>
+  <p [ngStyle]="{ color: obtenerColorResultado() }" [innerHTML]="feedback.resultado"></p>
+
+  <button *ngIf="feedback.intentosRestantes === 0 || ultimoIntentoMensaje === '¡Has Ganado!'" (click)="reiniciarJuego()">Reiniciar Juego</button>
+</div>
