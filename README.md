@@ -1,5 +1,7 @@
 # Adivinanza
 
+Al descargar el proyecto tendrás que descomprimir el archivo y desde el terminal y posicionandote en la carpeta del proyecto tendras que ejecutar el comando npm install para que baje las dependencias y así poder ejecutar el comando ng serve para ver el proyecto en el navegador.
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
 
 ## Development server
